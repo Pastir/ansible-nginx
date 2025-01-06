@@ -1,0 +1,22 @@
+---
+
+- name: Add the Nginx signing key
+  ansible.builtin.apt_key:
+    id: 8540A6F18833A80E9C1653A42FD21310B49F6B46
+    url: {{ nginx_signing_key_pgp }}
+    state: present
+    keyring: /usr/share/keyrings/nginx-archive-keyring.gpg
+
+# installing dependent packages
+- name: installing dependencies
+  ansible.builtin.apt:
+    name: "{{ nginx_dependent_packages }}"
+    state: latest
+    update_cache: yes
+
+# installing nginx packages
+- name: installing nginx packages
+  ansible.builtin.apt:
+    name: "{{ nginx_packages }}"
+    state: latest
+    update_cache: yes

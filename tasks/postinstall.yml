@@ -1,0 +1,14 @@
+---
+- name: Create a directory sites_available if it does not exist
+  ansible.builtin.file:
+    path: "{{ nginx_sites_available_path }}"
+    state: directory
+    mode: '0755'
+  when: nginx_sites_available_create
+
+- name: Create a directory sites_enabled if it does not exist
+  ansible.builtin.file:
+    path: "{{ nginx_sites_enabled_path }}"
+    state: directory
+    mode: '0755'
+  when: nginx_sites_enabled_create
