@@ -3,13 +3,11 @@
 
   Install nginx
 
-
 * Distribution support: 
   - Ubuntu: 20,22,24
   
 * Example:
 ```
----
 - hosts: 'localhost'
   vars:
      - ngx_packages:
