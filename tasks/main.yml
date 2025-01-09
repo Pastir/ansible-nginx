@@ -2,72 +2,71 @@
 
 # Include variable main setup.
 - name: Include variables.
-  include_vars: "vars/main.yml"
+  ansible.builtin.include_vars: "vars/main.yml"
 
 # Include variables based on the distribution
 - name: Include variables for {{ ansible_distribution }}
-  include_vars: "vars/{{ ansible_distribution }}.yml"
+  ansible.builtin.include_vars: "vars/{{ ansible_distribution }}.yml"
 
-- name: Define nginx_packages.
-  set_fact:
-    nginx_packages: "{{ __nginx_packages | list }}"
+- name: Define ngx_packages.
+  ansible.builtin.set_fact:
+    ngx_packages: "{{ __ngx_packages | list }}"
   when: nginx_packages is not defined
 
-- name: Define nginx_install.
-  set_fact:
-    nginx_install: "{{ __nginx_install | bool }}"
-  when: nginx_install is not defined
+- name: Define ngx_sites_available_create.
+  ansible.builtin.set_fact:
+    ngx_sites_available_create: "{{ __ngx_sites_available_create | bool }}"
+  when: ngx_sites_available_create is not defined
 
-- name: Define nginx_sites_available_create.
-  set_fact:
-    nginx_sites_available_create: "{{ __nginx_sites_available_create | bool }}"
-  when: nginx_sites_available_create is not defined
+- name: Define ngx_sites_available_path.
+  ansible.builtin.set_fact:
+    ngx_sites_available_path: "{{ __ngx_sites_available_path }}"
+  when: ngx_sites_available_path is not defined
 
-- name: Define nginx_sites_available_path.
-  set_fact:
-    nginx_sites_available_path: "{{ __nginx_sites_available_path }}"
-  when: nginx_sites_available_path is not defined
+- name: Define ngx_sites_enabled_create.
+  ansible.builtin.set_fact:
+    ngx_sites_enabled_create: "{{ __ngx_sites_enabled_create | bool }}"
+  when: ngx_sites_enabled_create is not defined
 
-- name: Define nginx_sites_enabled_create.
-  set_fact:
-    nginx_sites_enabled_create: "{{ __nginx_sites_enabled_create | bool }}"
-  when: nginx_sites_enabled_create is not defined
+- name: Define ngx_sites_enabled_path.
+  ansible.builtin.set_fact:
+    ngx_sites_enabled_path: "{{ __ngx_sites_enabled_path }}"
+  when: ngx_sites_enabled_path is not defined
 
-- name: Define nginx_sites_enabled_path.
-  set_fact:
-    nginx_sites_enabled_path: "{{ __nginx_sites_enabled_path }}"
-  when: nginx_sites_enabled_path is not defined
+- name: Define ngx_dependencies_packages.
+  ansible.builtin.set_fact:
+    ngx_dependencies_packages: "{{ __ngx_dependencies_packages }}"
+  when: ngx_dependencies_packages is not defined
 
-- name: Define nginx_dependent_packages.
-  set_fact:
-    nginx_dependent_packages: "{{ __nginx_dependent_packages }}"
-  when: nginx_dependent_packages is not defined
+- name: Define ngx_signing_key_pgp.
+  ansible.builtin.set_fact:
+    ngx_signing_key_pgp: "{{ __ngx_signing_key_pgp }}"
+  when: ngx_signing_key_pgp is not defined
 
-- name: Define nginx_signing_key_pgp.
-  set_fact:
-    nginx_signing_key_pgp: "{{ __nginx_signing_key_pgp }}"
-  when:  nginx_signing_key_pgp is not defined
+- name: Define ngx_signing_key_rsa_pub.
+  ansible.builtin.set_fact:
+    ngx_signing_key_rsa_pub: "{{ __ngx_signing_key_rsa_pub }}"
+  when: ngx_signing_key_rsa_pub is not defined
 
-- name: Define nginx_signing_key_rsa_pub.
-  set_fact:
-    nginx_signing_key_rsa_pub: "{{ __nginx_signing_key_rsa_pub }}"
-  when: nginx_signing_key_rsa_pub is not defined
+- name: Define ngx_repository.
+  ansible.builtin.set_fact:
+    ngx_repository: "{{ __ngx_repository }}"
+  when: ngx_repository is not defined
 
-- name: Define nginx_repository.
-  set_fact:
-    nginx_repository: "{{ __nginx_repository }}"
-  when: nginx_repository is not defined
-
+- name: Define ngx_keyrings.
+  ansible.builtin.set_fact:
+    ngx_keyrings: "{{ __ngx_keyrings }}"
+  when: ngx_keyrings is not defined
 
 # Include tasks based on the distribution
 - name: Install nginx for {{ ansible_distribution }}
-  include_tasks: "install/{{ ansible_distribution }}.yml"
+  ansible.builtin.include_tasks: "install/{{ ansible_distribution }}.yml"
   tags: install
 
 # Create directory sites_available && sites_enabled
 - name: Create directory sites_available && sites_enabled
-  include_tasks: "postinstall.yml"
+  ansible.builtin.include_tasks: "postinstall.yml"
   tags: install
 
 - name: Ensure NGINX is running
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers

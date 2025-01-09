@@ -1,18 +1,13 @@
 ---
-# Default NGINX version
-nginx_version: latest
-
 # Default NGINX signing key
-__nginx_signing_key_pgp: https://nginx.org/keys/nginx_signing.key
-__nginx_signing_key_rsa_pub: https://nginx.org/keys/nginx_signing.rsa.pub
-
-__nginx_install: true
+__ngx_signing_key_pgp: https://nginx.org/keys/nginx_signing.key
+__ngx_signing_key_rsa_pub: https://nginx.org/keys/nginx_signing.rsa.pub
+__ngx_keyrings: /usr/share/keyrings/nginx-archive-keyring.gpg
 
 # sites_available
-__nginx_sites_available_create: true
-__nginx_sites_available_path: /etc/nginx/sites-available
+__ngx_sites_available_create: true
+__ngx_sites_available_path: /etc/nginx/sites-available
 
 # sites_enabled
-__nginx_sites_enabled_create: true
-__nginx_sites_enabled_path: /etc/nginx/sites-enabled
-
+__ngx_sites_enabled_create: true
+__ngx_sites_enabled_path: /etc/nginx/sites-enabled
