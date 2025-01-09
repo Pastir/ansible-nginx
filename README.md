@@ -12,11 +12,12 @@
 ---
 - hosts: 'localhost'
   vars:
-     - nginx_version: latest
-     - nginx_sites_available_create: true
-     - nginx_sites_available_path: /etc/nginx/sites-available
-     - nginx_sites_enabled_create: true
-     - nginx_sites_enabled_path: /etc/nginx/sites-enabled
+     - ngx_packages:
+       - nginx=1.24.0
+     - ngx_sites_available_create: true
+     - ngx_sites_available_path: /etc/nginx/sites-available
+     - ngx_sites_enabled_create: true
+     - ngx_sites_enabled_path: /etc/nginx/sites-enabled
      
   roles: 
     - pastir.nginx
