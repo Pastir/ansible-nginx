@@ -5,6 +5,7 @@ __ngx_signing_key_rsa_pub: https://nginx.org/keys/nginx_signing.rsa.pub
 __ngx_keyrings: /usr/share/keyrings/nginx-archive-keyring.gpg
 
 # sites_available
+__ngx_nginx_conf: /etc/nginx
 __ngx_sites_available_create: true
 __ngx_sites_available_path: /etc/nginx/sites-available
 
